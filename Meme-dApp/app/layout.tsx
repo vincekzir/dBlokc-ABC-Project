@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
+import localfont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const syber = localfont({
+  src: [
+    {
+      path: "../public/fonts/Neo-Syber-Italic.ttf",
+      weight: "1000",
+    },
+  ],
+  variable: "--font-syber",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${syber.variable}`}>
       <body className={inter.className}>{children}</body>
     </html>
   );
