@@ -8,7 +8,17 @@ import bg from "../public/green.jpg";
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
   const [currentData, setcurrentData] = useState("");
-  const [mintAmount, setmintAmount] = useState<number>(0);
+  // const [mintAmount, setmintAmount] = useState<number>(0);
+  const [mintAddress, setMintAddress] = useState("");
+  const [mintAmount, setMintAmount] = useState("");
+
+  const handleMintAddressChange = (event) => {
+    setMintAddress(event.target.value);
+  };
+
+  const handleMintAmountChange = (event) => {
+    setMintAmount(event.target.value);
+  };
 
   const connectWallet = async () => {
     const { ethereum } = window as any;
@@ -25,11 +35,12 @@ export default function Home() {
     const signer = await provider.getSigner();
     const contract = getContract(signer);
     try {
-      const tx = await contract.mint(walletKey, mintAmount);
+      const tx = await contract.mint(mintAddress, mintAmount);
       console.log(tx);
       await tx.wait();
-      setmintAmount(mintAmount);
       setcurrentData("Coins Minted!");
+      console.log("Mint Address:", mintAddress);
+      console.log("Mint Amount:", mintAmount);
     } catch (e: any) {
       const decodedError = contract.interface.parseError(e.data);
       alert(`Minting failed: ${decodedError?.args}`);
@@ -137,14 +148,19 @@ export default function Home() {
           {/* Input text boxes */}
           <input
             type="text"
-            value={walletKey}
+            name="mint-address"
             placeholder="Enter Address"
-            className="border border-gray-300 px-2 py-1 mt-2 bg-light-green-100 text-black"
+            value={mintAddress}
+            onChange={handleMintAddressChange}
+            className="border border-gray-300 px-2 py-1 mt-2 bg-green-200 text-black rounded-xl"
           />
           <input
             type="text"
+            name="mint-amount"
             placeholder="Enter Amount"
-            className="{mintAmount} border border-gray-300 px-2 py-1 mt-2 bg-light-green-100 text-black"
+            value={mintAmount}
+            onChange={handleMintAmountChange}
+            className="border border-gray-300 px-2 py-1 mt-2 bg-green-200 text-black"
           />
         </div>
 
