@@ -48,33 +48,21 @@ export default function Home() {
 
   return (
     <main
-      className="flex min-h-screen flex-col items-center justify-between p-24 relative"
+      className="flex min-h-screen flex-col items-center justify-between p-12 relative"
       style={{
         backgroundImage: `url(${bg.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundPositionY: "50%",
+        backgroundPositionY: "80%",
         overflow: "hidden", // Hide overflow to prevent scrollbars
       }}
     >
-      <div className="absolute top-0 left-0 w-full h-6 bg-white z-10"></div>
-      <div className="z-20 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center items-center border-b border-gray-300 bg-white pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          <Image
-            src="/logo.png"
-            alt="NEO Logo"
-            className=""
-            width={60}
-            height={24}
-            priority
-          />
-          <span className="ml-4 text-xl font-syber">Neo Coin</span>
-        </p>
-
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
+      <div className="absolute top-0 left-0 w-full h-8 bg-white z-10"></div>
+      <div className="flex justify-center items-center">
+        <p className="fixed left-0 top-0 flex w-full justify-center items-center p-8 pb-6 pt-8 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:p-4 lg:dark:bg-transparent">
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
             href="https://sepolia.arbiscan.io/"
             target="_blank"
             rel="noopener noreferrer"
@@ -82,14 +70,22 @@ export default function Home() {
             <Image
               src="/arbitrum-arb-logo.svg"
               alt="Arbitrum Logo"
-              className=""
-              width={60}
+              className="mr-5"
+              width={40}
               height={24}
               priority
             />
           </a>
+          <Image
+            src="/logo.png"
+            alt="NEO Logo"
+            className=""
+            width={70}
+            height={24}
+            priority
+          />
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
             href="https://metamask.io/"
             target="_blank"
             rel="noopener noreferrer"
@@ -98,14 +94,15 @@ export default function Home() {
               src="/metamask.svg"
               alt="Metamask Logo"
               className=""
-              width={100}
+              width={80}
               height={24}
               priority
             />
           </a>
-        </div>
+        </p>
       </div>
-      <div className="mt-10 flex flex-col items-center">
+
+      <div className="flex flex-col items-center">
         <div
           className={`group rounded-lg border border-transparent text-center px-5 py-4 transition-all duration-500 ${
             walletKey !== "" ? "border-white" : ""
@@ -243,7 +240,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full h-6 bg-white z-10"></div>
+        <div className="absolute bottom-0 left-0 w-full h-8 bg-white z-10"></div>
       </div>
     </main>
   );
