@@ -8,7 +8,6 @@ import bg from "../public/green.jpg";
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
   const [currentData, setcurrentData] = useState("");
-  // const [mintAmount, setmintAmount] = useState<number>(0);
   const [mintAddress, setMintAddress] = useState("");
   const [mintAmount, setMintAmount] = useState("");
 
@@ -55,7 +54,7 @@ export default function Home() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundPositionY: "bottom",
+        backgroundPositionY: "50%",
         overflow: "hidden", // Hide overflow to prevent scrollbars
       }}
     >
