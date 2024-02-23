@@ -6,8 +6,10 @@ import { getContract } from "../../config";
 import Background from "../../public/green.jpg";
 import Wallet from "../components/Wallet.tsx";
 import ShowButtons from "../components/ShowButtons.tsx";
-import MintInputs from "../components/MintInputs.tsx";
-import StakeInputs from "../components/StakeInputs";
+import MintInputs from "../components/inputs/MintInputs";
+import StakeInputs from "../components/inputs/StakeInputs";
+import LockInputs from "../components/inputs/LockInputs";
+import WithdrawInputs from "../components/inputs/WithdrawInputs";
 
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
@@ -61,10 +63,12 @@ export default function Home() {
 
   const handleLockCoinClick = () => {
     setShowComponent(true);
+    setInputType("lock");
   };
 
   const handleWithdrawCoinClick = () => {
     setShowComponent(true);
+    setInputType("withdraw");
   };
 
   return (
@@ -148,23 +152,19 @@ export default function Home() {
         <div className="grid grid-cols-4 gap-14 justify-center items-center">
           <ShowButtons
             type={1}
-            walletKey={walletKey}
             onClick={handleMintCoinClick}
           />
           <ShowButtons
             type={2}
-            walletKey={walletKey}
             onClick={handleStakeCoinClick}
           />
           <ShowButtons
             type={3}
-            walletKey={walletKey}
-            onClick={handleMintCoinClick}
+            onClick={handleLockCoinClick}
           />
           <ShowButtons
             type={4}
-            walletKey={walletKey}
-            onClick={handleMintCoinClick}
+            onClick={handleWithdrawCoinClick}
           />
         </div>
       </div>
@@ -195,6 +195,28 @@ export default function Home() {
 
         {inputType === "stake" && (
           <StakeInputs
+            type={1}
+            mintAddress={mintAddress}
+            onClick={mintCoin}
+            handleMintAddressChange={handleMintAddressChange}
+            mintAmount={mintAmount}
+            handleMintAmountChange={handleMintAmountChange}
+          />
+        )}
+
+        {inputType === "lock" && (
+          <LockInputs
+            type={1}
+            mintAddress={mintAddress}
+            onClick={mintCoin}
+            handleMintAddressChange={handleMintAddressChange}
+            mintAmount={mintAmount}
+            handleMintAmountChange={handleMintAmountChange}
+          />
+        )}
+
+          {inputType === "withdraw" && (
+          <WithdrawInputs
             type={1}
             mintAddress={mintAddress}
             onClick={mintCoin}

@@ -1,4 +1,4 @@
-const StakeInputs = ({
+const WithdrawInputs = ({
   type,
   mintAddress,
   mintAmount,
@@ -8,7 +8,7 @@ const StakeInputs = ({
 }) => {
   return type === 1 ? (
     <div>
-      <p>STAKE</p>
+      <p>WITHDRAW</p>
 
       <div
         className="flex flex-col gap-4 justify-center items-center text-center"
@@ -42,11 +42,11 @@ const StakeInputs = ({
           }}
           className="bg-green-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          MINT!
+          WITHDRAW!
         </button>
       </div>
     </div>
   ) : null;
 };
 
-export default StakeInputs;
+export default WithdrawInputs;
