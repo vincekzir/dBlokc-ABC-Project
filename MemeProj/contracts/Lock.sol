@@ -27,6 +27,16 @@ contract NEOCoin is ERC20, Ownable {
         _transfer(msg.sender, address(this), amount);
     }
 
+    function getStake(address account) public view returns (uint256) {
+        return _stakes[account];
+    }
+
+    function getLastStakeTimestamp(
+        address account
+    ) public view returns (uint256) {
+        return _lastStakeTimestamp[account];
+    }
+
     function withdraw() public {
         require(_stakes[msg.sender] > 0, "No staked tokens");
 
@@ -37,15 +47,5 @@ contract NEOCoin is ERC20, Ownable {
         _stakes[msg.sender] = 0;
         _transfer(address(this), msg.sender, stakedAmount);
         _mint(msg.sender, reward);
-    }
-
-    function getStake(address account) public view returns (uint256) {
-        return _stakes[account];
-    }
-
-    function getLastStakeTimestamp(
-        address account
-    ) public view returns (uint256) {
-        return _lastStakeTimestamp[account];
     }
 }

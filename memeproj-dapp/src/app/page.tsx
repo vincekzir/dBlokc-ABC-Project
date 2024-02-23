@@ -7,10 +7,12 @@ import Background from "../../public/green.jpg";
 import Wallet from "../components/Wallet.tsx";
 import ShowButtons from "../components/ShowButtons.tsx";
 import MintInputs from "../components/MintInputs.tsx";
+import StakeInputs from "../components/StakeInputs";
 
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
   const [showComponent, setShowComponent] = useState(false);
+  const [inputType, setInputType] = useState("");
   const [mintAddress, setMintAddress] = useState("");
   const [mintAmount, setMintAmount] = useState("");
 
@@ -49,10 +51,12 @@ export default function Home() {
 
   const handleMintCoinClick = () => {
     setShowComponent(true);
+    setInputType("mint");
   };
 
   const handleStakeCoinClick = () => {
     setShowComponent(true);
+    setInputType("stake");
   };
 
   const handleLockCoinClick = () => {
@@ -150,7 +154,7 @@ export default function Home() {
           <ShowButtons
             type={2}
             walletKey={walletKey}
-            onClick={handleMintCoinClick}
+            onClick={handleStakeCoinClick}
           />
           <ShowButtons
             type={3}
@@ -178,7 +182,7 @@ export default function Home() {
           borderRadius: "0 0 20px 20px",
         }}
       >
-        {showComponent && (
+        {inputType === "mint" && (
           <MintInputs
             type={1}
             mintAddress={mintAddress}
@@ -188,8 +192,9 @@ export default function Home() {
             handleMintAmountChange={handleMintAmountChange}
           />
         )}
-        {showComponent && (
-          <MintInputs
+
+        {inputType === "stake" && (
+          <StakeInputs
             type={1}
             mintAddress={mintAddress}
             onClick={mintCoin}

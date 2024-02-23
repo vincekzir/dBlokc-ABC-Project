@@ -1,4 +1,4 @@
-const MintInputs = ({
+const StakeInputs = ({
   type,
   mintAddress,
   mintAmount,
@@ -8,7 +8,7 @@ const MintInputs = ({
 }) => {
   return type === 1 ? (
     <div>
-      <p>MINT</p>
+      <p>STAKE</p>
 
       <div
         className="flex flex-col gap-4 justify-center items-center text-center"
@@ -49,4 +49,4 @@ const MintInputs = ({
   ) : null;
 };
 
-export default MintInputs;
+export default StakeInputs;
