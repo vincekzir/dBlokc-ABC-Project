@@ -108,3 +108,84 @@
         </div> */}
 
         // <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 flex flex-col justify-center items-center">
+
+//// HEREEEEEEEEEEEEEEEEEEEE
+        
+
+
+      <div
+        className="absolute"
+        style={{
+          position: "absolute",
+          bottom: "45%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <section className="w-full h-full flex text-white text-2xl text-opacity-50 mt-3">
+          <button
+            className={`flex justify-center items-center bg-green-500 bg-opacity-10 border-2 border-white border-opacity-20 rounded-tl-2xl focus:font-bold focus:border-opacity-40 focus:bg-opacity-30 hover:bg-opacity-25 focus:text-opacity-60 ${
+              activeButton === "Mint" ? "bg-opacity-30 text-opacity-100" : ""
+            }`}
+            style={{ width: "60%", height: "70px" }}
+            onClick={() => handleButtonClick("Mint")}
+          >
+            <p>Mint</p>
+          </button>
+
+          <button
+            className={`flex justify-center items-center bg-green-500 bg-opacity-10 border-2 border-white border-opacity-20 focus:font-bold focus:border-opacity-40 focus:bg-opacity-30 hover:bg-opacity-25 focus:text-opacity-60 ${
+              activeButton === "Stake" ? "bg-opacity-30 text-opacity-100" : ""
+            }`}
+            style={{ width: "60%", height: "70px" }}
+            onClick={() => handleButtonClick("Stake")}
+          >
+            <p>Stake</p>
+          </button>
+
+          <button
+            className={`flex justify-center items-center bg-green-500 bg-opacity-10 border-2 border-white border-opacity-20 focus:font-bold focus:border-opacity-40 focus:bg-opacity-30 hover:bg-opacity-25 focus:text-opacity-60 ${
+              activeButton === "Lock" ? "bg-opacity-30 text-opacity-100" : ""
+            }`}
+            style={{ width: "60%", height: "70px" }}
+            onClick={() => handleButtonClick("Lock")}
+          >
+            <p>Lock</p>
+          </button>
+
+          <button
+            className={`flex justify-center items-center bg-green-500 bg-opacity-10 border-2 border-white border-opacity-20 rounded-tr-2xl focus:font-bold focus:border-opacity-40 focus:bg-opacity-30 hover:bg-opacity-25 focus:text-opacity-60 ${
+              activeButton === "Withdraw"
+                ? "bg-opacity-30 text-opacity-100"
+                : ""
+            }`}
+            style={{ width: "60%", height: "70px" }}
+            onClick={() => handleButtonClick("Withdraw")}
+          >
+            <p>Withdraw</p>
+          </button>
+        </section>
+      </div>
+
+      {/* Main content section */}
+      <section className="border-2 border-white border-opacity-25 h-[70vh] rounded-b-2xl bg-purple-900 bg-opacity-10 ">
+        <section className="flex">
+          <div
+            id="Default"
+            className={`${activeButton === "Mint" ? "hidden" : ""} ${
+              activeButton === "Stake" ? "hidden" : ""
+            } ${activeButton === "Lock" ? "hidden" : ""} ${
+              activeButton === "Withdraw" ? "hidden" : ""
+            }`}
+          >
+            {/* <mintInputs
+              type={1}
+              mintAddress={mintAddress}
+              onClick={mintCoin}
+              handleMintAddressChange={handleMintAddressChange}
+              mintAmount={mintAmount}
+              handleMintAmountChange={handleMintAmountChange}
+            /> */}
+          </div>
+        </section>
+      </section>

@@ -6,7 +6,7 @@ import { getContract } from "../../config";
 import Background from "../../public/green.jpg";
 import Wallet from "../components/Wallet.tsx";
 import ShowButtons from "../components/ShowButtons.tsx";
-import Inputs from "../components/Inputs.tsx";
+import MintInputs from "../components/MintInputs.tsx";
 
 export default function Home() {
   const [walletKey, setwalletKey] = useState("");
@@ -48,6 +48,18 @@ export default function Home() {
   };
 
   const handleMintCoinClick = () => {
+    setShowComponent(true);
+  };
+
+  const handleStakeCoinClick = () => {
+    setShowComponent(true);
+  };
+
+  const handleLockCoinClick = () => {
+    setShowComponent(true);
+  };
+
+  const handleWithdrawCoinClick = () => {
     setShowComponent(true);
   };
 
@@ -107,11 +119,28 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="mb-10 justify-center items-center text-center group rounded-lg bg-green-500 bg-opacity-10 border border-transparent px-7 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 flex flex-col">
+      <div
+        className="mb-10 justify-center items-center text-center group rounded-lg bg-green-500 bg-opacity-10 border border-transparent px-5 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 flex flex-col"
+        style={{
+          position: "absolute",
+          top: "24%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
         <Wallet type={1} walletKey={walletKey} onClick={connectWallet} />
       </div>
 
-      <div className="grid justify-center items-center text-center mb-60 group rounded-lg bg-green-500 bg-opacity-10 border border-transparent transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 fx flex-col">
+      <div
+        className="grid justify-center items-center text-center mb-60 group rounded-lg bg-green-500 bg-opacity-10 border border-transparent transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 fx flex-col"
+        style={{
+          position: "absolute",
+          bottom: "25%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          borderRadius: "20px 20px 0 0 ",
+        }}
+      >
         <div className="grid grid-cols-4 gap-14 justify-center items-center">
           <ShowButtons
             type={1}
@@ -136,17 +165,41 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="grid justify-center items-center text-center group rounded-lg bg-green-500 bg-opacity-10 border border-transparent transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 fx flex-col"></div>
-      {showComponent && (
-        <Inputs
-          type={1}
-          mintAddress={mintAddress}
-          onClick={mintCoin}
-          handleMintAddressChange={handleMintAddressChange}
-          mintAmount={mintAmount}
-          handleMintAmountChange={handleMintAmountChange}
-        />
-      )}
+      <div
+        className="grid justify-center items-center text-center group rounded-lg bg-green-500 bg-opacity-10 border border-transparent transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 flex-col"
+        style={{
+          position: "absolute",
+          width: "853px",
+          height: "400px",
+          bottom: "6%",
+          top: "65.2%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          borderRadius: "0 0 20px 20px",
+        }}
+      >
+        {showComponent && (
+          <MintInputs
+            type={1}
+            mintAddress={mintAddress}
+            onClick={mintCoin}
+            handleMintAddressChange={handleMintAddressChange}
+            mintAmount={mintAmount}
+            handleMintAmountChange={handleMintAmountChange}
+          />
+        )}
+        {showComponent && (
+          <MintInputs
+            type={1}
+            mintAddress={mintAddress}
+            onClick={mintCoin}
+            handleMintAddressChange={handleMintAddressChange}
+            mintAmount={mintAmount}
+            handleMintAmountChange={handleMintAmountChange}
+          />
+        )}
+      </div>
+
       <div className="absolute bottom-0 left-0 w-full h-8 bg-white z-10"></div>
     </main>
   );
