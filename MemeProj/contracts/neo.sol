@@ -8,6 +8,7 @@ contract NEOCoin is ERC20, Ownable {
     mapping(address => uint256) private _stakes;
     mapping(address => uint256) private _lastStakeTimestamp;
     uint256 private _rewardRate = 1;
+    uint256 private lockPeriod = 60; // 1 Minute
 
     constructor(
         address initialOwner
@@ -39,6 +40,7 @@ contract NEOCoin is ERC20, Ownable {
   }
 
   function withdraw() public {
+    require(block.timestamp > (_lastStakeTimestamp[msg.sender] + lockPeriod), "Your funds are still within the lock-in period. Please wait before withdrawing.");
     require(_stakes[msg.sender] > 0, "No staked tokens");
 
     uint256 stakedAmount = _stakes[msg.sender];
@@ -49,28 +51,13 @@ contract NEOCoin is ERC20, Ownable {
     _mint(msg.sender, reward);
   }
   
-  function getWithdraw() public view returns (uint256) {
-    require(_stakes[msg.sender] > 0, "No staked tokens");
-
-    uint256 stakedAmount = _stakes[msg.sender] ;
-    uint256 reward = ((block.timestamp - _lastStakeTimestamp[msg.sender]) * _rewardRate) * 1e18;
+  function getWithdraw(address account) public view returns (uint256) {
+    require(_stakes[account] > 0, "No staked tokens");
+    uint256 stakedAmount = _stakes[msg.sender] / 1e18;
+    uint256 reward = (block.timestamp - _lastStakeTimestamp[account]) * _rewardRate;
 
     uint256 newTotal = stakedAmount + reward;
     return newTotal;
   }
-  
 
-//   const elapsedStakeTime = await myContract.getElapsedStakeTime();
-//     console.log("Elapsed Stake Time (seconds):", elapsedStakeTime.toString());
-
-//          function getElapsedStakeTime() public view returns (uint256) {
-//         uint256 time = (block.timestamp - _lastStakeTimestamp[msg.sender]);
-//         return time;
-//   } 
-
-//   const ethAmount = ethers.parseUnits("10", 18);
-//   await myTokenContract.connect(owner).mint(owner.address, ethAmount);
-
-//   const ethAmountStake = ethers.parseUnits("10", 18);
-//   await myTokenContract.connect(owner).stake(ethAmountStake);
 }

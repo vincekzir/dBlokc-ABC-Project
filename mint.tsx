@@ -189,3 +189,20 @@
           </div>
         </section>
       </section>
+
+
+
+
+//   const elapsedStakeTime = await myContract.getElapsedStakeTime();
+//     console.log("Elapsed Stake Time (seconds):", elapsedStakeTime.toString());
+
+//          function getElapsedStakeTime() public view returns (uint256) {
+//         uint256 time = (block.timestamp - _lastStakeTimestamp[msg.sender]);
+//         return time;
+//   } 
+
+//   const ethAmount = ethers.parseUnits("10", 18);
+//   await myTokenContract.connect(owner).mint(owner.address, ethAmount);
+
+//   const ethAmountStake = ethers.parseUnits("10", 18);
+//   await myTokenContract.connect(owner).stake(ethAmountStake);

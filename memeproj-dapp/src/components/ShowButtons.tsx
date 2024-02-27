@@ -39,7 +39,7 @@ const ShowButtons = ({ type, onClick }) => {
         Lock
         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none f"></span>
       </h2>
-      <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Lock the Fuck In</p>
+      <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Check your Time</p>
     </button>
   ) : type === 4 ? (
     <button

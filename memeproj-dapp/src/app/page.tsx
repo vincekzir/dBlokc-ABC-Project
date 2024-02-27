@@ -1,54 +1,63 @@
 "use client";
 import { BrowserProvider } from "ethers";
-import Image from "next/image";
+import { JsonRpcProvider } from "ethers/providers";
 import { useEffect, useState } from "react";
 import { getContract } from "../../config";
+import Image from "next/image";
+
 import Background from "../../public/green.jpg";
-import Wallet from "../components/Wallet.tsx";
-import ShowButtons from "../components/ShowButtons.tsx";
+import Wallet from "../components/Wallet";
+import ShowButtons from "../components/ShowButtons";
 import MintInputs from "../components/inputs/MintInputs";
 import StakeInputs from "../components/inputs/StakeInputs";
-import LockInputs from "../components/inputs/LockInputs";
+// import LockInputs from "../components/inputs/LockInputs";
 import WithdrawInputs from "../components/inputs/WithdrawInputs";
+// import MessageInputs from "../components/inputs/MessageInputs";
 
 export default function Home() {
-  const [walletKey, setwalletKey] = useState("");
+  const [walletKey, setWalletKey] = useState("");
   const [showComponent, setShowComponent] = useState(false);
   const [inputType, setInputType] = useState("");
   const [mintAddress, setMintAddress] = useState("");
-  const [mintAmount, setMintAmount] = useState("");
+  const [mintAmount, setMintAmount] = useState<number>(0);
+  const [stakeAmount, setStakeAmount] = useState<number>(0);
+  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [mintSuccessMessage, setMintSuccessMessage] = useState("");
+  const [stakeSuccessMessage, setStakeSuccessMessage] = useState("");
+  const [withdrawSuccessMessage, setWithdrawSuccessMessage] = useState("");
+  const [mintAmountCoin, setMintAmountCoin] = useState("");
+  const [stakeAmountCoin, setStakeAmountCoin] = useState("");
 
-  const connectWallet = async () => {
-    const { ethereum } = window as any;
-    const accounts = await ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    setwalletKey(accounts[0]);
-  };
+  const [countdown, setCountdown] = useState(0);
 
-  const mintCoin = async () => {
-    const { ethereum } = window as any;
-    const provider = new BrowserProvider(ethereum);
-    const signer = await provider.getSigner();
-    const contract = getContract(signer);
-    try {
-      const tx = await contract.mint(mintAddress, mintAmount);
-      console.log(tx);
-      await tx.wait();
-      console.log("Mint Address:", mintAddress);
-      console.log("Mint Amount:", mintAmount);
-    } catch (e: any) {
-      const decodedError = contract.interface.parseError(e.data);
-      alert(`Minting failed: ${decodedError?.args}`);
-    }
-  };
+  // useEffect(() => {
+  //   let timer;
+  //   if (stakeSuccessMessage !== "" && countdown > 0) {
+  //     console.log("Staking successful. Starting countdown...");
+  //     timer = setInterval(() => {
+  //       setCountdown((prevCountdown) => {
+  //         if (prevCountdown === 1) {
+  //           clearInterval(timer);
+  //           return 0; // Ensure countdown stops at zero
+  //         } else {
+  //           return prevCountdown - 1;
+  //         }
+  //       });
+  //     }, 1000);
+  //   }
 
+    return () => clearInterval(timer);
+  }, [stakeSuccessMessage, countdown]);
   const handleMintAddressChange = (event) => {
     setMintAddress(event.target.value);
   };
 
   const handleMintAmountChange = (event) => {
     setMintAmount(event.target.value);
+  };
+
+  const handleStakeAmountChange = (event) => {
+    setStakeAmount(event.target.value);
   };
 
   const handleMintCoinClick = () => {
@@ -61,12 +70,7 @@ export default function Home() {
     setInputType("stake");
   };
 
-  const handleLockCoinClick = () => {
-    setShowComponent(true);
-    setInputType("lock");
-  };
-
-  const handleWithdrawCoinClick = () => {
+  const handleWithdrawCoinClick = async () => {
     setShowComponent(true);
     setInputType("withdraw");
   };
@@ -80,7 +84,7 @@ export default function Home() {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundPositionY: "80%",
-        overflow: "hidden", // Hide overflow to prevent scrollbars
+        overflow: "hidden",
       }}
     >
       <div className="absolute top-0 left-0 w-full h-8 bg-white z-10"></div>
@@ -136,7 +140,7 @@ export default function Home() {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <Wallet type={1} walletKey={walletKey} onClick={connectWallet} />
+        <Wallet type={1} walletKey={walletKey} setWalletKey={setWalletKey} />
       </div>
 
       <div
@@ -149,23 +153,10 @@ export default function Home() {
           borderRadius: "20px 20px 0 0 ",
         }}
       >
-        <div className="grid grid-cols-4 gap-14 justify-center items-center">
-          <ShowButtons
-            type={1}
-            onClick={handleMintCoinClick}
-          />
-          <ShowButtons
-            type={2}
-            onClick={handleStakeCoinClick}
-          />
-          <ShowButtons
-            type={3}
-            onClick={handleLockCoinClick}
-          />
-          <ShowButtons
-            type={4}
-            onClick={handleWithdrawCoinClick}
-          />
+        <div className="grid grid-cols-3 gap-14 justify-center items-center">
+          <ShowButtons type={1} onClick={handleMintCoinClick} />
+          <ShowButtons type={2} onClick={handleStakeCoinClick} />
+          <ShowButtons type={4} onClick={handleWithdrawCoinClick} />
         </div>
       </div>
 
@@ -182,52 +173,68 @@ export default function Home() {
           borderRadius: "0 0 20px 20px",
         }}
       >
+        <div
+          className="mb-10 justify-center items-center text-center group rounded-lg bg-green-500 bg-opacity-10 border border-transparent px-5 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 flex flex-col"
+          style={{
+            position: "absolute",
+            top: "37%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <h2 className="text-2xl font-semibold font-syber">
+            {walletKey ? (
+              <p style={{ color: "white", fontStyle: "italic" }}></p>
+            ) : (
+              <p style={{ color: "white", fontStyle: "italic" }}>
+                Start by Connecting YOur Wallet.
+              </p>
+            )}
+          </h2>
+        </div>
+
         {inputType === "mint" && (
           <MintInputs
             type={1}
             mintAddress={mintAddress}
-            onClick={mintCoin}
             handleMintAddressChange={handleMintAddressChange}
             mintAmount={mintAmount}
             handleMintAmountChange={handleMintAmountChange}
+            mintSuccessMessage={mintSuccessMessage}
+            setMintSuccessMessage={setMintSuccessMessage}
+            setMintAmountCoin={setMintAmountCoin}
+            mintAmountCoin={mintAmountCoin}
           />
         )}
-
         {inputType === "stake" && (
           <StakeInputs
             type={1}
-            mintAddress={mintAddress}
-            onClick={mintCoin}
-            handleMintAddressChange={handleMintAddressChange}
-            mintAmount={mintAmount}
-            handleMintAmountChange={handleMintAmountChange}
+            stakeAmount={stakeAmount}
+            handleStakeAmountChange={handleStakeAmountChange}
+            stakeSuccessMessage={stakeSuccessMessage}
+            setStakeSuccessMessage={setStakeSuccessMessage}
+            setStakeAmountCoin={setStakeAmountCoin}
+            stakeAmountCoin={stakeAmountCoin}
           />
         )}
-
-        {inputType === "lock" && (
-          <LockInputs
-            type={1}
-            mintAddress={mintAddress}
-            onClick={mintCoin}
-            handleMintAddressChange={handleMintAddressChange}
-            mintAmount={mintAmount}
-            handleMintAmountChange={handleMintAmountChange}
-          />
-        )}
-
-          {inputType === "withdraw" && (
+        {inputType === "withdraw" && (
           <WithdrawInputs
             type={1}
-            mintAddress={mintAddress}
-            onClick={mintCoin}
-            handleMintAddressChange={handleMintAddressChange}
-            mintAmount={mintAmount}
-            handleMintAmountChange={handleMintAmountChange}
+            withdrawSuccessMessage={withdrawSuccessMessage}
+            setWithdrawSuccessMessage={setWithdrawSuccessMessage}
+            setWithdrawAmount={setWithdrawAmount}
+            walletKey={walletKey}
+            countdown={countdown}
+            stakeSuccessMessage={stakeSuccessMessage}
           />
         )}
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-8 bg-white z-10"></div>
+      <div className="absolute bottom-0 left-0 w-full h-8 bg-white z-10 flex justify-center items-center">
+        <p className="t text-black">
+          by Vince Kazer M. Villasor - ABC04 Project
+        </p>
+      </div>
     </main>
   );
 }
