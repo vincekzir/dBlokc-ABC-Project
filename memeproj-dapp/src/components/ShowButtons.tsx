@@ -1,4 +1,4 @@
-const ShowButtons = ({ type, onClick }) => {
+const ShowButtons = ({ type, onClick }: { type: any; onClick: () => any }) => {
   return type === 1 ? (
     <button
       onClick={onClick}

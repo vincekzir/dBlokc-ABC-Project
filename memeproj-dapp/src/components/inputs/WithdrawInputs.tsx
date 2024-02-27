@@ -8,6 +8,12 @@ const WithdrawInputs = ({
   setWithdrawSuccessMessage,
   setWithdrawAmount,
   walletKey,
+}: {
+  type: number;
+  withdrawSuccessMessage: string;
+  setWithdrawSuccessMessage: any;
+  setWithdrawAmount: any;
+  walletKey: string;
 }) => {
   const [withdrawn, setWithdrawn] = useState(false);
   const [hasStakedCoins, setHasStakedCoins] = useState(false);
@@ -31,7 +37,7 @@ const WithdrawInputs = ({
       setWithdrawSuccessMessage(message);
       setWithdrawn(true);
       console.log("Withdrawal Successful");
-    } catch (e) {
+    } catch (e: any) {
       const decodedError = contract.interface.parseError(e.data);
       alert(`Withdrawal failed: ${decodedError?.args}`);
     }
@@ -62,7 +68,7 @@ const WithdrawInputs = ({
       setWithdrawSuccessMessage(message);
       console.log("Withdrawal Balance:", withdrawAmount);
       setHasStakedCoins(true);
-    } catch (e) {
+    } catch (e: any) {
       if (e.message.includes("no stakes")) {
         setWithdrawSuccessMessage("You don't have any stakes to withdraw.");
       } else {

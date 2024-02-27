@@ -1,4 +1,5 @@
 "use client";
+import React, { ChangeEvent } from "react";
 import { BrowserProvider } from "ethers";
 import { JsonRpcProvider } from "ethers/providers";
 import { useEffect, useState } from "react";
@@ -28,16 +29,16 @@ export default function Home() {
   const [mintAmountCoin, setMintAmountCoin] = useState("");
   const [stakeAmountCoin, setStakeAmountCoin] = useState("");
 
-  const handleMintAddressChange = (event) => {
+  const handleMintAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
     setMintAddress(event.target.value);
   };
 
-  const handleMintAmountChange = (event) => {
-    setMintAmount(event.target.value);
+  const handleMintAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setMintAmount(Number(event.target.value)); // Assuming mintAmount is a number
   };
 
-  const handleStakeAmountChange = (event) => {
-    setStakeAmount(event.target.value);
+  const handleStakeAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setStakeAmount(Number(event.target.value));
   };
 
   const handleMintCoinClick = () => {

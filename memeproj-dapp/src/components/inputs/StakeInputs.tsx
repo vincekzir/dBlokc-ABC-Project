@@ -11,6 +11,14 @@ const StakeInputs = ({
   setStakeSuccessMessage,
   setStakeAmountCoin,
   stakeAmountCoin,
+}: {
+  type: any;
+  stakeAmount: any;
+  handleStakeAmountChange: any;
+  stakeSuccessMessage: any;
+  setStakeSuccessMessage: any;
+  setStakeAmountCoin: any;
+  stakeAmountCoin: any;
 }) => {
   const stakeCoin = async () => {
     const { ethereum } = window as any;

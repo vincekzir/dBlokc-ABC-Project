@@ -1,6 +1,14 @@
 // import { useEffect, useState } from "react";
 
-const Wallet = ({ type, walletKey, setWalletKey }) => {
+const Wallet = ({
+  type,
+  walletKey,
+  setWalletKey,
+}: {
+  type: any;
+  walletKey: any;
+  setWalletKey: any;
+}) => {
   const connectWallet = async () => {
     const { ethereum } = window as any;
     const accounts = await ethereum.request({

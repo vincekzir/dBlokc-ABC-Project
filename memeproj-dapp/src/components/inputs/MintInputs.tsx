@@ -13,6 +13,16 @@ const MintInputs = ({
   setMintSuccessMessage,
   setMintAmountCoin,
   mintAmountCoin,
+}: {
+  type: any;
+  mintAddress: any;
+  mintAmount: any;
+  handleMintAddressChange: any;
+  handleMintAmountChange: any;
+  mintSuccessMessage: any;
+  setMintSuccessMessage: any;
+  setMintAmountCoin: any;
+  mintAmountCoin: any;
 }) => {
   const mintCoin = async () => {
     const { ethereum } = window as any;
