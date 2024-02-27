@@ -8,15 +8,9 @@ const WithdrawInputs = ({
   setWithdrawSuccessMessage,
   setWithdrawAmount,
   walletKey,
-  countdown,
-  stakeSuccessMessage,
 }) => {
-  const [withdrawn, setWithdrawn] = useState(false); // State variable to track if withdrawal has been successfully done
+  const [withdrawn, setWithdrawn] = useState(false);
   const [hasStakedCoins, setHasStakedCoins] = useState(false);
-
-  useEffect(() => {
-    console.log("Countdown prop:", countdown);
-  }, [countdown]);
 
   const withdrawCoin = async () => {
     const { ethereum } = window as any;
@@ -35,7 +29,7 @@ const WithdrawInputs = ({
       );
 
       setWithdrawSuccessMessage(message);
-      setWithdrawn(true); // Update state to indicate successful withdrawal
+      setWithdrawn(true);
       console.log("Withdrawal Successful");
     } catch (e) {
       const decodedError = contract.interface.parseError(e.data);

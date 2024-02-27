@@ -30,21 +30,21 @@ export default function Home() {
 
   const [countdown, setCountdown] = useState(0);
 
-  // useEffect(() => {
-  //   let timer;
-  //   if (stakeSuccessMessage !== "" && countdown > 0) {
-  //     console.log("Staking successful. Starting countdown...");
-  //     timer = setInterval(() => {
-  //       setCountdown((prevCountdown) => {
-  //         if (prevCountdown === 1) {
-  //           clearInterval(timer);
-  //           return 0; // Ensure countdown stops at zero
-  //         } else {
-  //           return prevCountdown - 1;
-  //         }
-  //       });
-  //     }, 1000);
-  //   }
+  useEffect(() => {
+    let timer;
+    if (stakeSuccessMessage !== "" && countdown > 0) {
+      console.log("Staking successful. Starting countdown...");
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => {
+          if (prevCountdown === 1) {
+            clearInterval(timer);
+            return 0; // Ensure countdown stops at zero
+          } else {
+            return prevCountdown - 1;
+          }
+        });
+      }, 1000);
+    }
 
     return () => clearInterval(timer);
   }, [stakeSuccessMessage, countdown]);
@@ -63,16 +63,34 @@ export default function Home() {
   const handleMintCoinClick = () => {
     setShowComponent(true);
     setInputType("mint");
+    setStakeAmount(0);
+    // setStakeSuccessMessage("");
+    // // setStakeAmountCoin("");
+    setWithdrawSuccessMessage("");
+    // setWithdrawAmount("");
   };
 
   const handleStakeCoinClick = () => {
     setShowComponent(true);
     setInputType("stake");
+    setMintAddress("");
+    setMintAmount(0);
+    // setMintSuccessMessage("");
+    // // setMintAmountCoin("");
+    setWithdrawSuccessMessage("");
+    // setWithdrawAmount("");
   };
 
   const handleWithdrawCoinClick = async () => {
     setShowComponent(true);
     setInputType("withdraw");
+    setMintAddress("");
+    setMintAmount(0);
+    setMintSuccessMessage("");
+    // // setMintAmountCoin("");
+    setStakeAmount(0);
+    setStakeSuccessMessage("");
+    // // setStakeAmountCoin("");
   };
 
   return (
@@ -224,8 +242,8 @@ export default function Home() {
             setWithdrawSuccessMessage={setWithdrawSuccessMessage}
             setWithdrawAmount={setWithdrawAmount}
             walletKey={walletKey}
-            countdown={countdown}
-            stakeSuccessMessage={stakeSuccessMessage}
+            // countdown={countdown}
+            // stakeSuccessMessage={stakeSuccessMessage}
           />
         )}
       </div>
