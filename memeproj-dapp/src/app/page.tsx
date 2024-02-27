@@ -28,26 +28,6 @@ export default function Home() {
   const [mintAmountCoin, setMintAmountCoin] = useState("");
   const [stakeAmountCoin, setStakeAmountCoin] = useState("");
 
-  const [countdown, setCountdown] = useState(0);
-
-  // useEffect(() => {
-  //   let timer;
-  //   if (stakeSuccessMessage !== "" && countdown > 0) {
-  //     console.log("Staking successful. Starting countdown...");
-  //     timer = setInterval(() => {
-  //       setCountdown((prevCountdown) => {
-  //         if (prevCountdown === 1) {
-  //           clearInterval(timer);
-  //           return 0; // Ensure countdown stops at zero
-  //         } else {
-  //           return prevCountdown - 1;
-  //         }
-  //       });
-  //     }, 1000);
-  //   }
-
-    return () => clearInterval(timer);
-  }, [stakeSuccessMessage, countdown]);
   const handleMintAddressChange = (event) => {
     setMintAddress(event.target.value);
   };
