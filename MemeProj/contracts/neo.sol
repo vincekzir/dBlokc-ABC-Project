@@ -14,7 +14,7 @@ contract NEOCoin is ERC20, Ownable {
         address initialOwner
     ) ERC20("NEOCoin", "NEO") Ownable(initialOwner) {}
 
-    function mint(address account, uint256 amount) public onlyOwner {
+    function mint(address account, uint256 amount) public {
         uint256 newAmount = amount * 1e18;
         _mint(account, newAmount);
     }

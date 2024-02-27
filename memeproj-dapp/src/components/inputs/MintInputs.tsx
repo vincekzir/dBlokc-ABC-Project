@@ -112,7 +112,7 @@ const MintInputs = ({
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  Contract Ad: 0xDB408CBA0f4C648dbf7559c5f4Fb28Bdf9Bb65c5
+                  Contract Ad: 0xDFc3df7B0Fb530f6EC77e8981964f1e81Fac6d09
                 </p>
               </p>
             ) : (
