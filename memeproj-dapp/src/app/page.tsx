@@ -186,7 +186,7 @@ export default function Home() {
               <p style={{ color: "white", fontStyle: "italic" }}></p>
             ) : (
               <p style={{ color: "white", fontStyle: "italic" }}>
-                Start by Connecting YOur Wallet.
+                Start by Connecting Your Wallet.
               </p>
             )}
           </h2>
